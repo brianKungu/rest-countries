@@ -23,7 +23,7 @@ export default function CountryComponent({ country }: countryProps) {
 
         <p>
           <strong>Population: </strong>
-          {country?.population}
+          {country?.population.toLocaleString()}
         </p>
         <p>
           <strong>Region: </strong>

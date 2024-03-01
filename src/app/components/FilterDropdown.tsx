@@ -1,44 +1,34 @@
 "use client";
 import React from "react";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Button,
-} from "@nextui-org/react";
+import { Country } from "../interface/interface";
 
-export default function FilterDropdown() {
-  const [selectedKeys, setSelectedKeys] = React.useState(
-    new Set(["Filter by region"])
-  );
-
-  const selectedValue = React.useMemo(
-    () => Array.from(selectedKeys).join(",").replaceAll("_", " "),
-    [selectedKeys]
-  );
-  return (
-    <Dropdown>
-      <DropdownTrigger>
-        <Button variant="bordered" className="capitalize">
-          {selectedValue}
-        </Button>
-      </DropdownTrigger>
-      <DropdownMenu
-        aria-label="Single selection example"
-        variant="flat"
-        disallowEmptySelection
-        selectionMode="single"
-        selectedKeys={selectedKeys}
-        onSelectionChange={setSelectedKeys}
-        color="primary"
-      >
-        <DropdownItem key="text">Text</DropdownItem>
-        <DropdownItem key="number">Number</DropdownItem>
-        <DropdownItem key="date">Date</DropdownItem>
-        <DropdownItem key="single_date">Single Date</DropdownItem>
-        <DropdownItem key="iteration">Iteration</DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
-  );
+interface FilterDropdownProps {
+  countries: Country[];
+  onSelectContinent: (continent: string) => void;
 }
+
+const FilterDropdown: React.FC<FilterDropdownProps> = ({
+  countries,
+  onSelectContinent,
+}) => {
+  const handleContinentChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    onSelectContinent(event.target.value);
+  };
+
+  return (
+    <div>
+      <select id="continent-select" onChange={handleContinentChange} className="p-2  bg-white dark:bg-darkBlueElements shadow-md rounded-md">
+        <option value="">Filter by Region</option>
+        {countries.map((country, index) => (
+          <option key={index} value={country.region}>
+            {country.region}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+export default FilterDropdown;
