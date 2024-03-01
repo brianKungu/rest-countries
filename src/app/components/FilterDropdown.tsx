@@ -19,7 +19,13 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
 
   return (
     <div>
-      <select id="continent-select" onChange={handleContinentChange} className="p-2  bg-white dark:bg-darkBlueElements shadow-md rounded-md">
+      <label htmlFor="continent-select sr-only">Select Continent:</label>
+      <select
+        id="continent-select"
+        title="Select Continent"
+        onChange={handleContinentChange}
+        className="p-2  bg-white dark:bg-darkBlueElements shadow-md rounded-md"
+      >
         <option value="">Filter by Region</option>
         {countries.map((country, index) => (
           <option key={index} value={country.region}>

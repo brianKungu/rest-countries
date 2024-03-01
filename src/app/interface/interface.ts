@@ -11,13 +11,12 @@ interface Language {
   nativeName: string;
 }
 
-interface RegionalBloc {
-  acronym: string;
-  name: string;
-  otherNames: string[];
+interface Flag {
+  svg: string;
+  png: string;
 }
 
-interface Translation {
+interface Translations {
   [key: string]: string;
 }
 
@@ -35,20 +34,15 @@ export interface Country {
   latlng: number[];
   demonym: string;
   area: number;
-  gini?: number;
   timezones: string[];
   borders: string[];
   nativeName: string;
   numericCode: string;
-  flags: {
-    svg: string;
-    png: string;
-  };
+  flags: Flag;
   currencies: Currency[];
   languages: Language[];
-  translations: Translation;
+  translations: Translations;
   flag: string;
-  regionalBlocs: RegionalBloc[];
   cioc: string;
   independent: boolean;
 }
